@@ -1,9 +1,12 @@
 import React, { useState, useRef } from 'react';
 import caja from '../estilos/caja.css';
+import RegisterS from './Register.jsx'; // Asegúrate de importar tu componente 
+
 
 function Caja() {
-    // Estado para controlar si el menú está visible o no
-    const [menuVisible, setMenuVisible] = useState(false);
+  const [showGames, setShowGames] = useState(true); // Estado para controlar la visibilidad de los juegos
+  const [showCards, setShowCards] = useState(false)
+  const [menuVisible, setMenuVisible] = useState(false); // Estado para controlar si el menú está visible o no
     
     // Referencias a los elementos que se manipulan
     const navRef = useRef(null);
@@ -26,23 +29,29 @@ function Caja() {
         }
     };
 
+    const handleRegisters = () =>{
+      setShowCards(true)
+      setShowGames(false);
+  }
+
     return (
         <>
             <header>
                 <div className="container__menu">
-                    <div className="logo">
-                        <img className="logo" src="images/logo-magtimus-v2.3-1.png" alt="Logo"/>
+                   <div className="logo">
+                    <img className="logo" src={require("../imagenes/logo-magtimus-v2.3-1.png")} alt="Logo"/> 
                     </div>
                     <div className="menu">
                         <i className="fas fa-bars" id="btn_menu" onClick={mostrarMenu}></i>
                         <div id="back_menu" ref={backgroundMenuRef} onClick={ocultarMenu}></div>
                         <nav id="nav" ref={navRef}>
-                            <img src="images/logo-magtimus-v2.3-1.png" alt="Logo"/>
+                            <img src={require("../imagenes/logo-magtimus-v2.3-1.png")} alt="Logo"/>
                             <ul>
                                 <li><a href="#" id="selected">Inicio</a></li>
                                 <li><a href="#">Servicios</a></li>
                                 <li><a href="#">Nosotros</a></li>
                                 <li><a href="#">Contactos</a></li>
+                                <li><a href="#" onClick={handleRegisters}>Registrarse</a></li>
                             </ul>
                         </nav>
                     </div>
@@ -76,9 +85,9 @@ function Caja() {
                 <div className="col-lg-5 col-md-6">
                   <div className="slider_detail-box">
                     <h1>
-                      Start <br/>
-                      Business with <br/>
-                      Our Company
+                      sed <br/>
+                      do eiusmod  <br/>
+                      incididunt
                     </h1>
                     <p>
                       sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
@@ -86,7 +95,7 @@ function Caja() {
                     </p>
                     <div className="btn-box">
                       <a href="" class="btn-1">
-                        Read More
+                      Leer mas
                       </a>
                     </div>
                   </div>
@@ -105,9 +114,9 @@ function Caja() {
                 <div className="col-lg-5 col-md-6">
                   <div className="slider_detail-box">
                     <h1>
-                      Start <br/>
-                      Business with <br/>
-                      Our Company
+                    sed <br/>
+                      do eiusmod  <br/>
+                      incididunt
                     </h1>
                     <p>
                       sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
@@ -115,7 +124,7 @@ function Caja() {
                     </p>
                     <div className="btn-box">
                       <a href="" class="btn-1">
-                        Read More
+                      Leer mas
                       </a>
                     </div>
                   </div>
@@ -134,9 +143,9 @@ function Caja() {
                 <div className="col-lg-5 col-md-6">
                   <div className="slider_detail-box">
                     <h1>
-                      Start <br/>
-                      Business with <br/>
-                      Our Company
+                    sed <br/>
+                      do eiusmod  <br/>
+                      incididunt
                     </h1>
                     <p>
                       sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
@@ -144,7 +153,7 @@ function Caja() {
                     </p>
                     <div class="btn-box">
                       <a href="" class="btn-1">
-                        Read More
+                       Leer mas
                       </a>
                     </div>
                   </div>
@@ -158,21 +167,13 @@ function Caja() {
             </div>
           </div>
         </div>
-        <div className="carousel_btn-container">
-          <a className="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-            <span className="sr-only">Previous</span>
-          </a>
-          <a className="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-            <span class="sr-only">Next</span>
-          </a>
-        </div>
       </div>
     </section>
     <section className="welcome_section layout_padding">
     <div className="container">
       <div className="custom_heading-container">
         <h2>
-          Welcome To Our Company
+          Bienvenidos
         </h2>
       </div>
       <div className="layout_padding2">
@@ -189,7 +190,7 @@ function Caja() {
           </p>
           <div>
             <a href="">
-              Read More
+            Leer mas
             </a>
           </div>
         </div>
@@ -201,7 +202,7 @@ function Caja() {
     <div className="container">
       <div className="custom_heading-container">
         <h2>
-          Our Services
+         Nuestro Servicio
         </h2>
       </div>
       <div className="service_container layout_padding2">
@@ -211,8 +212,8 @@ function Caja() {
           </div>
           <div className="detail-box">
             <h4>
-              Business <br/>
-              Consultant
+             AAAAA <br/>
+            AAAA
             </h4>
             <p>
               have suffered alteration in some form, by injected humour, or randomised words which don&#39;t look even
@@ -226,8 +227,8 @@ function Caja() {
           </div>
           <div className="detail-box">
             <h4>
-              Marketing <br/>
-              Analytics
+              BBBBB<br/>
+               BBBBB
             </h4>
             <p>
               have suffered alteration in some form, by injected humour, or randomised words which don&#39;t look even
@@ -241,8 +242,8 @@ function Caja() {
           </div>
           <div className="detail-box">
             <h4>
-              Financial <br/>
-              Planning
+              CCCC <br/>
+              CCCC
             </h4>
             <p>
               have suffered alteration in some form, by injected humour, or randomised words which don&#39;t look even
@@ -253,7 +254,7 @@ function Caja() {
       </div>
       <div>
         <a href="">
-          Read More
+        Leer mas
         </a>
       </div>
     </div>
@@ -262,7 +263,7 @@ function Caja() {
     <div className="container">
       <div className="custom_heading-container">
         <h2>
-          Do you have any business problem ?
+          Tienes Problemas con ... ?
         </h2>
       </div>
       <div className="layout_padding2">
@@ -276,7 +277,7 @@ function Caja() {
           </p>
           <div>
             <a href="">
-              Read More
+              Leer mas
             </a>
           </div>
         </div>
@@ -288,7 +289,7 @@ function Caja() {
     <div className="container">
       <div className="custom_heading-container">
         <h2>
-          Why Choose Us
+          Por que elegirnos?
         </h2>
       </div>
       <div className="content-container">
@@ -356,7 +357,7 @@ function Caja() {
   <section className="client_section layout_padding">
     <div className="container">
       <h2>
-        What Our Clients Says
+        Consultas
       </h2>
       <div id="carouselExampleControls" className="carousel slide" data-ride="carousel">
         <div className="carousel-inner">
@@ -439,12 +440,6 @@ function Caja() {
             </div>
           </div>
         </div>
-        <a className="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
-          <span className="sr-only">Previous</span>
-        </a>
-        <a className="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
-          <span className="sr-only">Next</span>
-        </a>
       </div>
 
     </div>
@@ -464,160 +459,26 @@ function Caja() {
             <div className="col-md-6 col-lg-4">
               <div className="d-flex">
                 <h5>
-                  Useful Link
+                  Informacion
                 </h5>
               </div>
               <div class="d-flex ">
                 <ul>
                   <li>
                     <a href="">
-                      About Us
+                     Sobre Nosotros
                     </a>
                   </li>
                   <li>
                     <a href="">
-                      About services
+                      Sobre nuestro Servicio
                     </a>
                   </li>
                   <li>
-                    <a href="">
-                      About Departments
-                    </a>
                   </li>
                   <li>
                     <a href="">
-                      Services
-                    </a>
-                  </li>
-                  <li>
-                    <a href="">
-                      Contact Us
-                    </a>
-                  </li>
-                </ul>
-                <ul class="ml-3 ml-md-5">
-                  <li>
-                    <a href="">
-                      Loram ipusm
-                    </a>
-                  </li>
-                  <li>
-                    <a href="">
-                      Loram ipusm
-                    </a>
-                  </li>
-                  <li>
-                    <a href="">
-                      Loram ipusm
-                    </a>
-                  </li>
-                  <li>
-                    <a href="">
-                      Loram ipusm
-                    </a>
-                  </li>
-                  <li>
-                    <a href="">
-                      Loram ipusm
-                    </a>
-                  </li>
-                </ul>
-              </div>
-            </div>
-            <div className="col-md-6 col-lg-4">
-              <div className="d-flex">
-                <h5>
-                  The Services
-                </h5>
-              </div>
-              <div className="d-flex ">
-                <ul>
-                  <li>
-                    <a href="">
-                      About Us
-                    </a>
-                  </li>
-                  <li>
-                    <a href="">
-                      About services
-                    </a>
-                  </li>
-                  <li>
-                    <a href="">
-                      About Departments
-                    </a>
-                  </li>
-                  <li>
-                    <a href="">
-                      Services
-                    </a>
-                  </li>
-                  <li>
-                    <a href="">
-                      Contact Us
-                    </a>
-                  </li>
-                </ul>
-                <ul className="ml-3 ml-md-5">
-                  <li>
-                    <a href="">
-                      Lorem ipsum dolor
-                    </a>
-                  </li>
-                  <li>
-                    <a href="">
-                      sit amet, consectetur
-                    </a>
-                  </li>
-                  <li>
-                    <a href="">
-                      adipiscing elit,
-                    </a>
-                  </li>
-                  <li>
-                    <a href="">
-                      sed do eiusmod
-                    </a>
-                  </li>
-                  <li>
-                    <a href="">
-                      tempor incididunt
-                    </a>
-                  </li>
-                </ul>
-              </div>
-            </div>
-            <div className="col-md-6 col-lg-4">
-              <div className="d-flex">
-                <h5>
-                  Contact Us
-                </h5>
-              </div>
-              <div class="d-flex ">
-                <ul>
-                  <li>
-                    <a href="">
-                      About Us
-                    </a>
-                  </li>
-                  <li>
-                    <a href="">
-                      About services
-                    </a>
-                  </li>
-                  <li>
-                    <a href="">
-                      About Departments
-                    </a>
-                  </li>
-                  <li>
-                    <a href="">
-                      Services
-                    </a>
-                  </li>
-                  <li>
-                    <a href="">
-                      Contact Us
+                      Nuestro Contacto
                     </a>
                   </li>
                 </ul>
@@ -655,29 +516,18 @@ function Caja() {
         <div className="d-flex flex-column flex-lg-row justify-content-between align-items-center align-items-lg-baseline">
           <div className="social-box">
             <a href="">
-              <img src="images/fb.png" alt=""/>
+              <img src={require("../imagenes/fb.png")} alt=""/>
             </a>
 
             <a href="">
-              <img src="images/twitter.png" alt=""/>
+              <img src={require("../imagenes/twitter.png")} alt=""/>
             </a>
             <a href="">
-              <img src="images/linkedin1.png" alt=""/>
+              <img src={require("../imagenes/linkedin1.png")} alt=""/>
             </a>
             <a href="">
-              <img src="images/instagram1.png" alt=""/>
+              <img src={require("../imagenes/instagram1.png")} alt=""/>
             </a>
-          </div>
-          <div className="form_container mt-5">
-            <form action="">
-              <label for="subscribeMail">
-                Newsletter
-              </label>
-              <input type="email" placeholder="Enter Your email" id="subscribeMail"/>
-              <button type="submit">
-                Subscribe
-              </button>
-            </form>
           </div>
         </div>
       </div>
