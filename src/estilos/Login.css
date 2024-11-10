@@ -5,11 +5,11 @@
 
 }
 body{
-   
+    background: linear-gradient(to right, #c59090, #d15d59);
 }
 .Form-Regis{
     width: 400px;
-    background: rgb(12, 13, 14); 
+    background: linear-gradient(to right, #602eaf, #5b47b6);
     padding: 30px;
     margin: auto;
     margin-top: 100px;
@@ -25,7 +25,7 @@ body{
 }
 .controles {
     width: 100%;
-    background-color: rgb(233, 213, 33);
+    background-color: #ffffff;
     padding: 10px;
     border-radius: 4px;
     margin-bottom: 20px;
@@ -46,13 +46,13 @@ body{
 
 }
 .Form-Regis a:hover{
-    color: rgb(233, 213, 33);
+    color: #563ec4;
     text-decoration: underline;
     
 }
 .Form-Regis .boton{
     width: 100%;
-    background-color: rgb(233, 213, 33);
+    background-color: #ffffff;
     
     padding: 12px;
     color: rgb(0, 0, 0);
