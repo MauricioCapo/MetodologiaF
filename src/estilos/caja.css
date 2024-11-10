@@ -6,7 +6,12 @@
     padding: 0;
     box-sizing: border-box;
     font-family: 'Source Sans Pro', sans-serif;
+    
 }
+body{
+  background-color: #ffff;
+}
+
 
 header{
     width: 100%;
@@ -61,6 +66,11 @@ header{
     background: #4d6cf5;
     padding: 10px 40px;
     border-radius: 50px;
+}
+#selected2{
+  background: #FD8986;
+  padding: 10px ;
+  border-radius: 50px;
 }
 
 .menu nav img{

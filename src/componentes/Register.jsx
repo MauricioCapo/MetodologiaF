@@ -3,7 +3,7 @@ import Register from '../estilos/Register.css';
 function RegisterS(){
     return(
         <div>
-            <body>
+            <body className="body">
     <section class="Form-Regis">
         <form action="" id="form">
             <div class="Form">  

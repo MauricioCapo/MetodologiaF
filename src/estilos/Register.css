@@ -4,9 +4,12 @@
     box-sizing: border-box;
 
 }
-body{
+.body{
     background: linear-gradient(to right, #c59090, #d15d59);
+    padding-bottom: 250px;
+    padding-top: 50px;
 }
+
 .Form-Regis{
     width: 400px;
     background: linear-gradient(to right, #602eaf, #5b47b6);

@@ -1,76 +1,80 @@
 import React, { useState, useRef } from 'react';
 import caja from '../estilos/caja.css';
-import RegisterS from './Register.jsx'; // Asegúrate de importar tu componente 
-
+import RegisterS from './Register.jsx';
 
 function Caja() {
-  const [showGames, setShowGames] = useState(true); // Estado para controlar la visibilidad de los juegos
-  const [showCards, setShowCards] = useState(false)
-  const [menuVisible, setMenuVisible] = useState(false); // Estado para controlar si el menú está visible o no
-    
-    // Referencias a los elementos que se manipulan
-    const navRef = useRef(null);
-    const backgroundMenuRef = useRef(null);
+  const [menuVisible, setMenuVisible] = useState(false);
+  const [showRegister, setShowRegister] = useState(false);
+  const [showMenu, setShowMenu] = useState(true);
 
-    // Funciones para mostrar y ocultar el menú
-    const mostrarMenu = () => {
-        setMenuVisible(true);
-        if (navRef.current && backgroundMenuRef.current) {
-            navRef.current.style.right = "0px";
-            backgroundMenuRef.current.style.display = "block";
-        }
-    };
+  const navRef = useRef(null);
+  const backgroundMenuRef = useRef(null);
 
-    const ocultarMenu = () => {
-        setMenuVisible(false);
-        if (navRef.current && backgroundMenuRef.current) {
-            navRef.current.style.right = "-250px";
-            backgroundMenuRef.current.style.display = "none";
-        }
-    };
+  const mostrarMenu = () => {
+    setMenuVisible(true);
+    if (navRef.current && backgroundMenuRef.current) {
+      navRef.current.style.right = "0px";
+      backgroundMenuRef.current.style.display = "block";
+    }
+  };
 
-    const handleRegisters = () =>{
-      setShowCards(true)
-      setShowGames(false);
-  }
+  const ocultarMenu = () => {
+    setMenuVisible(false);
+    if (navRef.current && backgroundMenuRef.current) {
+      navRef.current.style.right = "-250px";
+      backgroundMenuRef.current.style.display = "none";
+    }
+  };
 
-    return (
-        <>
-            <header>
-                <div className="container__menu">
-                   <div className="logo">
-                    <img className="logo" src={require("../imagenes/logo-magtimus-v2.3-1.png")} alt="Logo"/> 
-                    </div>
-                    <div className="menu">
-                        <i className="fas fa-bars" id="btn_menu" onClick={mostrarMenu}></i>
-                        <div id="back_menu" ref={backgroundMenuRef} onClick={ocultarMenu}></div>
-                        <nav id="nav" ref={navRef}>
-                            <img src={require("../imagenes/logo-magtimus-v2.3-1.png")} alt="Logo"/>
-                            <ul>
-                                <li><a href="#" id="selected">Inicio</a></li>
-                                <li><a href="#">Servicios</a></li>
-                                <li><a href="#">Nosotros</a></li>
-                                <li><a href="#">Contactos</a></li>
-                                <li><a href="#" onClick={handleRegisters}>Registrarse</a></li>
-                            </ul>
-                        </nav>
-                    </div>
-                </div>
-            </header>
-            <main>
-                <div className="container__cover">
-                    <div className="cover">
-                        <div className="text">
-                            <h1>Ayudamos a las empresas a tener una mejor Gestion.</h1>
-                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Cupiditate quo nostrum eligendi sequi iste quae voluptates assumenda nemo odit cum!</p>
-                            <input type="button" value="Leer Más"/>
-                        </div>
-                        <div className="svg">
-                            <img src="images/developer_activity.svg" alt="Desarrollo"/>
-                        </div>
-                    </div>
-                </div>
-            </main>
+  const handleRegisters = () => {
+    setShowRegister(true);
+    setShowMenu(false);
+  };
+
+  const handleMenu = () => {
+    setShowMenu(true);
+    setShowRegister(false);
+  };
+
+  return (
+    <>
+      <header>
+        <div className="container__menu">
+          <div className="logo">
+            <img className="logo" src={require("../imagenes/logo-magtimus-v2.3-1.png")} alt="Logo" />
+          </div>
+          <div className="menu">
+            <i className="fas fa-bars" id="btn_menu" onClick={mostrarMenu}></i>
+            <div id="back_menu" ref={backgroundMenuRef} onClick={ocultarMenu}></div>
+            <nav id="nav" ref={navRef}>
+              <img src={require("../imagenes/logo-magtimus-v2.3-1.png")} alt="Logo" />
+              <ul>
+                <li><a href="#" id="selected" onClick={handleMenu}>Inicio</a></li>
+                <li><a href="#"id="selected2">Servicios</a></li>
+                <li><a href="#"id="selected2">Nosotros</a></li>
+                <li><a href="#"id="selected2">Contactos</a></li>
+                <li><a href="#"id="selected2" onClick={handleRegisters}>Registrarse</a></li>
+              </ul>
+            </nav>
+          </div>
+        </div>
+      </header>
+      {showMenu && (
+        <main>
+          {/* El contenido del componente original */}
+          <div className="container__cover">
+            <div className="cover">
+              <div className="text">
+                <h1>Ayudamos a las empresas a tener una mejor Gestion.</h1>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Cupiditate quo nostrum eligendi sequi iste quae voluptates assumenda nemo odit cum!</p>
+                <input type="button" value="Comenzar" />
+              </div>
+              <div className="svg">
+                <img src={require("../imagenes/developer_activity.png")} alt="Desarrollo" />
+              </div>
+            </div>
+          </div>
+            
             <section className=" slider_section ">
       <div id="carouselExampleIndicators" className="carousel slide" data-ride="carousel">
         <ol className="carousel-indicators">
@@ -534,8 +538,11 @@ function Caja() {
 
     </section>
     </div>
-        </>
-    );
+        </main>
+      )}
+      {showRegister && <RegisterS />}
+    </>
+  );
 }
 
 export default Caja;
