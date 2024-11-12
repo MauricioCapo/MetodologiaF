@@ -4,8 +4,10 @@
     box-sizing: border-box;
 
 }
-body{
+.body{
     background: linear-gradient(to right, #c59090, #d15d59);
+    padding-bottom: 400px;
+    padding-top: 100px;
 }
 .Form-Regis{
     width: 400px;
@@ -35,7 +37,7 @@ body{
 .Form-Regis p {
     height: 40px;
     text-align: center;
-    font-size: 18px;
+    font-size: 14px;
     line-height: 40px;
 
 }
@@ -46,7 +48,7 @@ body{
 
 }
 .Form-Regis a:hover{
-    color: #563ec4;
+    color: #c4523e;
     text-decoration: underline;
     
 }

@@ -1,11 +1,16 @@
 import React, { useState, useRef } from 'react';
 import caja from '../estilos/caja.css';
 import RegisterS from './Register.jsx';
+import ProyectoS from './Proyectos.jsx';
+import LoginS from './Login.jsx';
 
 function Caja() {
   const [menuVisible, setMenuVisible] = useState(false);
   const [showRegister, setShowRegister] = useState(false);
   const [showMenu, setShowMenu] = useState(true);
+  const [showPrincipal, setShowPrincipal] = useState(false)
+  const [showSubmenu, setShowSubmenu] = useState(false);
+  const [showLogin, setShowLogin] = useState(false);
 
   const navRef = useRef(null);
   const backgroundMenuRef = useRef(null);
@@ -35,6 +40,19 @@ function Caja() {
     setShowMenu(true);
     setShowRegister(false);
   };
+  
+  const handlePrincipal = () => {
+    setShowPrincipal(true);
+    setShowMenu(false);
+  };
+  
+  const handleLogin = () => {
+    setShowLogin(true);
+    setShowMenu(false);
+  };
+  const handleCuentas = () => {
+    setShowSubmenu(!showSubmenu);
+  };
 
   return (
     <>
@@ -49,12 +67,20 @@ function Caja() {
             <nav id="nav" ref={navRef}>
               <img src={require("../imagenes/logo-magtimus-v2.3-1.png")} alt="Logo" />
               <ul>
-                <li><a href="#" id="selected" onClick={handleMenu}>Inicio</a></li>
-                <li><a href="#"id="selected2">Servicios</a></li>
-                <li><a href="#"id="selected2">Nosotros</a></li>
-                <li><a href="#"id="selected2">Contactos</a></li>
-                <li><a href="#"id="selected2" onClick={handleRegisters}>Registrarse</a></li>
-              </ul>
+      <li><a href="#" id="selected" onClick={handleMenu}>Inicio</a></li>
+      <li><a href="#" id="selected2">Servicios</a></li>
+      <li><a href="#" id="selected2">Nosotros</a></li>
+      <li><a href="#" id="selected2">Contactos</a></li>
+      <li>
+        <a href="#" id="selected2" onClick={handleCuentas}>Cuentas</a>
+        {showSubmenu && (
+          <ul className="submenu">
+            <li><a href="#" onClick={handleRegisters}>Registrarse</a></li>
+            <li><a href="#" onClick={handleLogin}>Iniciar sesión</a></li>
+          </ul>
+        )}
+      </li>
+    </ul>
             </nav>
           </div>
         </div>
@@ -67,7 +93,7 @@ function Caja() {
               <div className="text">
                 <h1>Ayudamos a las empresas a tener una mejor Gestion.</h1>
                 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Cupiditate quo nostrum eligendi sequi iste quae voluptates assumenda nemo odit cum!</p>
-                <input type="button" value="Comenzar" />
+                <input type="button" value="Comenzar"  onClick={handlePrincipal}/>
               </div>
               <div className="svg">
                 <img src={require("../imagenes/developer_activity.png")} alt="Desarrollo" />
@@ -463,7 +489,7 @@ function Caja() {
             <div className="col-md-6 col-lg-4">
               <div className="d-flex">
                 <h5>
-                  Informacion
+                 Contactos
                 </h5>
               </div>
               <div class="d-flex ">
@@ -541,6 +567,8 @@ function Caja() {
         </main>
       )}
       {showRegister && <RegisterS />}
+     
+      {showLogin && <LoginS/>}
     </>
   );
 }
