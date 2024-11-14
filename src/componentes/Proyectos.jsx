@@ -10,7 +10,7 @@ const ProyectoS = () => {
     };
 
     return (
-        <div className="container">
+        <div className="container2">
             <div className={`sidebar ${isOpen ? 'open' : 'closed'}`}>
                 <button onClick={toggleSidebar} className="toggle-button">
                     {isOpen ? <CgCompressRight /> : <CgArrowsExpandRight />} 
