@@ -302,8 +302,26 @@ header{
     padding-bottom: 5px;
   }
   
-  
-  
+  .iconoLR{
+      font-size: 21px;
+     
+  }
+  .submenu {
+    position: absolute;
+    top: 100%; /* Posición debajo del elemento padre */
+    left: 50%; /* Posición inicial */
+    transform: translateX(-65%); /* Centra el submenú */
+    background: transparent;
+    list-style: none;
+    padding-top: 15px;
+    margin: 0;
+    z-index: 1000;
+}
+
+li {
+    position: relative; /* Asegura que los submenús se posicionen correctamente */
+}
+
   /*end header section*/
   /* slider section */
   .slider_section {

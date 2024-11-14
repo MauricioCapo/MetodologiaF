@@ -1,8 +1,9 @@
 import React, { useState, useRef } from 'react';
-import caja from '../estilos/caja.css';
+import "../estilos/caja.css";
 import RegisterS from './Register.jsx';
 import ProyectoS from './Proyectos.jsx';
 import LoginS from './Login.jsx';
+import { CgUser } from "react-icons/cg";
 
 function Caja() {
   const [menuVisible, setMenuVisible] = useState(false);
@@ -72,7 +73,7 @@ function Caja() {
       <li><a href="#" id="selected2">Nosotros</a></li>
       <li><a href="#" id="selected2">Contactos</a></li>
       <li>
-        <a href="#" id="selected2" onClick={handleCuentas}>Cuentas</a>
+        <a href="#" id="selected2" onClick={handleCuentas}><CgUser className="iconoLR" /></a>
         {showSubmenu && (
           <ul className="submenu">
             <li><a href="#" onClick={handleRegisters}>Registrarse</a></li>
@@ -567,7 +568,7 @@ function Caja() {
         </main>
       )}
       {showRegister && <RegisterS />}
-     
+      {showPrincipal && <ProyectoS/>}
       {showLogin && <LoginS/>}
     </>
   );
