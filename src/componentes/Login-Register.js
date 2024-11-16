@@ -1,6 +1,6 @@
-import express from 'express';
-import cookieParser from 'cookie-parser';
-import morgan from 'morgan';
+const express = require('express');
+const cookieParser = require('cookie-parser');
+const morgan = require('morgan');
 
 const app = express();
 const PORT = 3000;

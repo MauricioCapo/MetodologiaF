@@ -1,36 +1,18 @@
-import React, { useState, useRef } from 'react';
+import React, { useState } from 'react';
 import "../estilos/caja.css";
 import RegisterS from './Register.jsx';
 import ProyectoS from './Proyectos.jsx';
 import LoginS from './Login.jsx';
 import { CgUser } from "react-icons/cg";
+import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 function Caja() {
-  const [menuVisible, setMenuVisible] = useState(false);
   const [showRegister, setShowRegister] = useState(false);
   const [showMenu, setShowMenu] = useState(true);
-  const [showPrincipal, setShowPrincipal] = useState(false)
-  const [showSubmenu, setShowSubmenu] = useState(false);
+  const [showPrincipal, setShowPrincipal] = useState(false);
   const [showLogin, setShowLogin] = useState(false);
-
-  const navRef = useRef(null);
-  const backgroundMenuRef = useRef(null);
-
-  const mostrarMenu = () => {
-    setMenuVisible(true);
-    if (navRef.current && backgroundMenuRef.current) {
-      navRef.current.style.right = "0px";
-      backgroundMenuRef.current.style.display = "block";
-    }
-  };
-
-  const ocultarMenu = () => {
-    setMenuVisible(false);
-    if (navRef.current && backgroundMenuRef.current) {
-      navRef.current.style.right = "-250px";
-      backgroundMenuRef.current.style.display = "none";
-    }
-  };
+  const navigate = useNavigate();   
 
   const handleRegisters = () => {
     setShowRegister(true);
@@ -45,14 +27,12 @@ function Caja() {
   const handlePrincipal = () => {
     setShowPrincipal(true);
     setShowMenu(false);
+    navigate('/proyectos');
   };
   
   const handleLogin = () => {
     setShowLogin(true);
     setShowMenu(false);
-  };
-  const handleCuentas = () => {
-    setShowSubmenu(!showSubmenu);
   };
 
   return (
@@ -63,44 +43,40 @@ function Caja() {
             <img className="logo" src={require("../imagenes/logo-magtimus-v2.3-1.png")} alt="Logo" />
           </div>
           <div className="menu">
-            <i className="fas fa-bars" id="btn_menu" onClick={mostrarMenu}></i>
-            <div id="back_menu" ref={backgroundMenuRef} onClick={ocultarMenu}></div>
-            <nav id="nav" ref={navRef}>
-              <img src={require("../imagenes/logo-magtimus-v2.3-1.png")} alt="Logo" />
-                <ul>
-                  <li><a href="#" id="selected" onClick={handleMenu}>Inicio</a></li>
-                  <li><a href="#" id="selected2">Servicios</a></li>
-                  <li><a href="#" id="selected2">Nosotros</a></li>
-                  <li><a href="#" id="selected2">Contactos</a></li>
-                  <li>
-                    <a href="#" id="selected2" onClick={handleCuentas}><CgUser className="iconoLR" /></a>
-                    {showSubmenu && (
-                      <ul className="submenu">
-                        <li><a href="#" onClick={handleRegisters}>Registrarse</a></li>
-                        <li><a href="#" onClick={handleLogin}>Iniciar sesión</a></li>
-                </ul>
-        )}
-      </li>
-    </ul>
+            <nav>
+              <ul>
+                <li><Link to="/inicio" id="selected" onClick={handleMenu}>Inicio</Link></li>
+                <li><a href="#" id="selected2">Servicios</a></li>
+                <li><a href="#" id="selected2">Nosotros</a></li>
+                <li><a href="#" id="selected2">Contactos</a></li>
+                <li>
+                  <a href="#" id="selected2" onClick={handleLogin}><CgUser className="iconoLR" /></a>
+                  <ul className="submenu">
+                    <li><Link to="/register" onClick={handleRegisters}>Registrarse</Link></li>
+                    <li><Link to="/login" onClick={handleLogin}>Iniciar sesión</Link></li>
+                  </ul>
+                </li>
+              </ul>
             </nav>
           </div>
         </div>
       </header>
+
       {showMenu && (
         <main>
           <div className="container__cover">
             <div className="cover">
               <div className="text">
-                <h1>Ayudamos a las empresas a tener una mejor Gestion.</h1>
+                <h1>Ayudamos a las empresas a tener una mejor Gestión.</h1>
                 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Cupiditate quo nostrum eligendi sequi iste quae voluptates assumenda nemo odit cum!</p>
-                <input type="button" value="Comenzar"  onClick={handlePrincipal}/>
+                <input type="button" value="Comenzar" onClick={handlePrincipal} />
               </div>
               <div className="svg">
                 <img src={require("../imagenes/developer_activity.png")} alt="Desarrollo" />
               </div>
             </div>
           </div>
-            
+           
             <section className=" slider_section ">
       <div  className="carousel slide" >
         <div className="carousel-inner">
@@ -431,7 +407,7 @@ function Caja() {
     </div>
   </section>
   
-  <div class="footer_bg">
+  <div className="footer_bg">
     <section className="info_section layout_padding2-bottom">
       <div className="container">
         <h3 className="">
@@ -495,9 +471,10 @@ function Caja() {
     </div>
         </main>
       )}
+
       {showRegister && <RegisterS />}
-      {showPrincipal && <ProyectoS/>}
-      {showLogin && <LoginS/>}
+      {showPrincipal && <ProyectoS />}
+      {showLogin && <LoginS />}
     </>
   );
 }

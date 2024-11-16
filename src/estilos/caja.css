@@ -180,7 +180,7 @@ header{
 @media screen and (max-width: 1020px){
 
     .container__cover{
-        background-image: url("");
+        
         background-color: #FD8986;
     }
 
@@ -897,4 +897,4 @@ li {
  
   
   /* end footer section*/
-  /*# sourceMappingURL=style.css.map */
+ 

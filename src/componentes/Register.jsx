@@ -31,7 +31,6 @@ function RegisterS() {
                     username, 
                     password, 
                     email, 
-                    dob 
                 }),
             });
             const data = await response.json();
