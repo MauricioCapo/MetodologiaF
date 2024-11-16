@@ -17,24 +17,27 @@ function LoginS({ setIsLoggedIn }) {
             return;
         }
         try {
-            const response = await fetch('http://localhost:3000/login', {
+            const response = await fetch('http://localhost:5000/login', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ user: username, password }),
+                body: JSON.stringify({ username, password }),  // Cambié 'user' a 'username'
+                credentials: 'include',  // Asegura que las cookies se envíen con la solicitud
             });
             const data = await response.json();
-            if (response.status === 200) {
-                setIsLoggedIn(true); // Si la respuesta es exitosa, el usuario está logueado
+            if (response.ok) {  // Verificamos si la respuesta fue exitosa (status 200)
+                // Si la respuesta es exitosa, el usuario está logueado
+                setMessage('¡Bienvenido!');
+            } else {
+                setMessage(data.mensaje);  // Muestra el mensaje del servidor en caso de error
             }
-            setMessage(data.mensaje);
         } catch (error) {
             console.error('Error al realizar la petición:', error);
             setMessage('Datos inválidos, verifique si están bien');
         }
     };
-
+    
     const handleRegisters = () => {
         setShowRegister(true);
         setShowLogin(false);
@@ -78,7 +81,7 @@ function LoginS({ setIsLoggedIn }) {
                                 <p>
                                     No tienes una cuenta?{' '}
                                     <Link to="/register" className="mi-clase" onClick={handleRegisters}>
-                                         Registrarse
+                                        Registrarse
                                     </Link>
                                 </p>
                             </div>
@@ -92,3 +95,4 @@ function LoginS({ setIsLoggedIn }) {
 }
 
 export default LoginS;
+    

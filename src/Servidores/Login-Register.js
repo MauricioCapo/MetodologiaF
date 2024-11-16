@@ -1,23 +1,26 @@
 import express from 'express';
 import cookieParser from 'cookie-parser';
 import morgan from 'morgan';
-import path from 'path';  // Cambié de require a import
+import path from 'path';
 import cors from 'cors';
 
-const app = express();  // Debe ir aquí, después de importar express
-const PORT = 3000;
-
-// Habilitar CORS después de la inicialización de app
-app.use(cors());
+const app = express();
+const PORT = 5000;
 
 // Middleware para logging y parseo
-app.use(morgan('dev'));     // Loggea cada request en consola
-app.use(cookieParser());    // Para leer cookies
-app.use(express.json());    // Para leer JSONs
-app.use(express.static('public'));  // Para servir archivos estáticos
+app.use(morgan('dev'));
+app.use(cookieParser());
+app.use(express.json());
+app.use(express.static('public'));
+
+// Configuración de CORS
+app.use(cors({
+    origin: 'http://localhost:3000',  // Reemplaza con el dominio de tu frontend
+    credentials: true,  // Permite el envío de cookies
+}));
 
 // Usuarios de prueba
-let usuarios = [{ user: "admin", password: "1234" }];
+let usuarios = [{ username: "admin", password: "1234" }];
 
 // Ruta /inicio que sirve el archivo index.html de la carpeta public
 app.get('/inicio', (req, res) => {
@@ -45,29 +48,28 @@ function generarToken() {
 
 // Ruta de registro de usuario
 app.post('/register', async (req, res) => {
-    const { user, password } = req.body;
+    const { username, password } = req.body;
 
-    let usuario = usuarios.find(u => u.user === user);
+    let usuario = usuarios.find(u => u.username === username);
     if (usuario) {
-        res.status(401).json({ ok: false, mensaje: 'Usuario ya registrado' });
+        return res.status(401).json({ ok: false, mensaje: 'Usuario ya registrado' });
     } else {
-        usuarios.push({ user, password });
-        res.status(201).json({ ok: true, mensaje: 'Usuario registrado' });
-        console.log('Usuarios registrados:', usuarios);
+        usuarios.push({ username, password });
+        return res.status(201).json({ ok: true, mensaje: 'Usuario registrado' });
     }
 });
 
 // Ruta de inicio de sesión
 app.post('/login', async (req, res) => {
-    const { user, password } = req.body;
+    const { username, password } = req.body;
 
-    let usuario = usuarios.find(u => u.user === user && password === u.password);
+    let usuario = usuarios.find(u => u.username === username && password === u.password);
     if (usuario) {
         let token = generarToken();
         usuario.token = token;
         res.cookie('token', token, {
             httpOnly: true,
-            expires: new Date(Date.now() + 600000) // Expira en 10 minutos
+            expires: new Date(Date.now() + 600000)  // Expira en 10 minutos
         });
         res.status(200).json({ ok: true, mensaje: 'Usuario logueado', token });
     } else {
@@ -86,7 +88,7 @@ app.put('/logout', authMiddleware, (req, res) => {
 // Ruta de información de usuario autenticado
 app.get('/info', authMiddleware, (req, res) => {
     let usuario = req.usuario;
-    res.status(200).json({ ok: true, mensaje: 'Está logueado', usuario: usuario.user });
+    res.status(200).json({ ok: true, mensaje: 'Esta logueado', usuario: usuario.username });
 });
 
 // Ruta para obtener la lista de usuarios (solo para prueba)
