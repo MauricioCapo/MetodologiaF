@@ -1,45 +1,92 @@
 import React, { useEffect, useState } from "react";
 import "../estilos/Login.css";
 import RegisterS from './Register.jsx';
-
-function LoginS(){
+function LoginS({ setIsLoggedIn }) {
     const [showLogin, setShowLogin] = useState(true);
-    const [showRegister, setShowRegister] = useState(false); // Supongo que quieres mostrar el formulario de registro al inicio
+    const [showRegister, setShowRegister] = useState(false);
+    const [username, setUsername] = useState('');
+    const [password, setPassword] = useState('');
+    const [message, setMessage] = useState('');
+
+    const handleLogin = async (event) => {
+        event.preventDefault();
+        if (!username || !password) {
+            setMessage('Por favor, complete todos los campos.');
+            return;
+        }
+        try {
+            const response = await fetch('http://localhost:3000/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ user: username, password }),
+            });
+            const data = await response.json();
+            if (response.status === 200) {
+                setIsLoggedIn(true); // Si la respuesta es exitosa, el usuario está logueado
+            }
+            setMessage(data.mensaje);
+        } catch (error) {
+            console.error('Error al realizar la petición:', error);
+            setMessage('Datos inválidos, verifique si están bien');
+        }
+    };
 
     const handleRegisters = () => {
         setShowRegister(true);
         setShowLogin(false);
     };
-    return(
+
+    return (
         <>
-         {showLogin && (
-            <div className="body">
-                <section className="Form-Regis">
-                    <form action="" id="form">
-                        <div className="Form">  
-                            <h3>Iniciar Sesion</h3>
-                            <div>
-                                <input className="controles" type="text" name="Nombre_usuario" id="Usuario" placeholder="Nombre usuario"/>
+            {showLogin && (
+                <div className="body">
+                    <section className="Form-Regis">
+                        <form onSubmit={handleLogin} id="form">
+                            <div className="Form">
+                                <h3>Iniciar Sesión</h3>
+                                <div>
+                                    <input
+                                        className="controles"
+                                        type="text"
+                                        value={username}
+                                        onChange={(e) => setUsername(e.target.value)}
+                                        placeholder="Nombre usuario"
+                                    />
+                                </div>
+                                <div>
+                                    <input
+                                        className="controles"
+                                        type="password"
+                                        value={password}
+                                        onChange={(e) => setPassword(e.target.value)}
+                                        placeholder="Contraseña"
+                                    />
+                                </div>
+                                {message && <p>{message}</p>}
+                                <div>
+                                    <input
+                                        type="submit"
+                                        value="Iniciar Sesión"
+                                        className="boton"
+                                        id="submit"
+                                    />
+                                </div>
+                                <p>
+                                    No tienes una cuenta?{' '}
+                                    <a href="#" onClick={handleRegisters}>
+                                        Registrarse
+                                    </a>
+                                </p>
                             </div>
-                            <div>
-                                <input className="controles" type="password" name="Contraseñas" id="Contraseña" placeholder="Contraseña"/>
-                            </div>
-                            <div className="error" id="error">
-                        </div>
-                            <p>Estoy de acuerdo con <a href="#"> Terminos y Condiciones</a>.</p>
-                            <input type="submit" onclick="return Enviar()" value="Enviar" className="boton" id="submit"/><button></button>
-                            
-                            <p>No tienes una cuenta?<a href="#" onClick={handleRegisters}>Registrarse</a></p>
-                        </div>
-                    </form>
-                    
-                </section>
-    </div>
-       )}
+                        </form>
+                    </section>
+                </div>
+            )}
             {showRegister && <RegisterS />}
         </>
     );
 }
-
 
 export default LoginS;

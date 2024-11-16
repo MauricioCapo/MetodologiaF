@@ -67,18 +67,18 @@ function Caja() {
             <div id="back_menu" ref={backgroundMenuRef} onClick={ocultarMenu}></div>
             <nav id="nav" ref={navRef}>
               <img src={require("../imagenes/logo-magtimus-v2.3-1.png")} alt="Logo" />
-              <ul>
-      <li><a href="#" id="selected" onClick={handleMenu}>Inicio</a></li>
-      <li><a href="#" id="selected2">Servicios</a></li>
-      <li><a href="#" id="selected2">Nosotros</a></li>
-      <li><a href="#" id="selected2">Contactos</a></li>
-      <li>
-        <a href="#" id="selected2" onClick={handleCuentas}><CgUser className="iconoLR" /></a>
-        {showSubmenu && (
-          <ul className="submenu">
-            <li><a href="#" onClick={handleRegisters}>Registrarse</a></li>
-            <li><a href="#" onClick={handleLogin}>Iniciar sesión</a></li>
-          </ul>
+                <ul>
+                  <li><a href="#" id="selected" onClick={handleMenu}>Inicio</a></li>
+                  <li><a href="#" id="selected2">Servicios</a></li>
+                  <li><a href="#" id="selected2">Nosotros</a></li>
+                  <li><a href="#" id="selected2">Contactos</a></li>
+                  <li>
+                    <a href="#" id="selected2" onClick={handleCuentas}><CgUser className="iconoLR" /></a>
+                    {showSubmenu && (
+                      <ul className="submenu">
+                        <li><a href="#" onClick={handleRegisters}>Registrarse</a></li>
+                        <li><a href="#" onClick={handleLogin}>Iniciar sesión</a></li>
+                </ul>
         )}
       </li>
     </ul>
@@ -88,7 +88,6 @@ function Caja() {
       </header>
       {showMenu && (
         <main>
-          {/* El contenido del componente original */}
           <div className="container__cover">
             <div className="cover">
               <div className="text">
@@ -103,29 +102,32 @@ function Caja() {
           </div>
             
             <section className=" slider_section ">
-      <div id="carouselExampleIndicators" className="carousel slide" data-ride="carousel">
-        <ol className="carousel-indicators">
-          <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active">01</li>
-          <li data-target="#carouselExampleIndicators" data-slide-to="1">02</li>
-          <li data-target="#carouselExampleIndicators" data-slide-to="2">03</li>
-        </ol>
+      <div  className="carousel slide" >
         <div className="carousel-inner">
           <div className="carousel-item active">
             <div className="container">
               <div className="row">
                 <div className="col-lg-5 col-md-6">
                   <div className="slider_detail-box">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="carousel-item">
+            <div className="container">
+              <div className="row">
+                <div className="col-lg-5 col-md-6">
+                  <div className="slider_detail-box">
                     <h1>
-                      sed <br/>
-                      do eiusmod  <br/>
-                      incididunt
+                    Bienvenidos a GTPI
                     </h1>
                     <p>
-                      sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
-                      nostrud exercitation ullamco laboris nisi
+                      Simplifica la gestión de tus proyectos con nuestra plataforma intuitiva y poderosa. 
+                      Organiza tareas, colabora con tu equipo y alcanza tus objetivos con mayor eficiencia.
                     </p>
                     <div className="btn-box">
-                      <a href="" class="btn-1">
+                      <a href="" className="btn-1">
                       Leer mas
                       </a>
                     </div>
@@ -142,53 +144,6 @@ function Caja() {
           <div className="carousel-item">
             <div className="container">
               <div className="row">
-                <div className="col-lg-5 col-md-6">
-                  <div className="slider_detail-box">
-                    <h1>
-                    sed <br/>
-                      do eiusmod  <br/>
-                      incididunt
-                    </h1>
-                    <p>
-                      sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
-                      nostrud exercitation ullamco laboris nisi
-                    </p>
-                    <div className="btn-box">
-                      <a href="" class="btn-1">
-                      Leer mas
-                      </a>
-                    </div>
-                  </div>
-                </div>
-                <div className="col-md-6">
-                  <div className="slider_img-box">
-                    <img src="images/slider-img.png" alt=""/>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="carousel-item">
-            <div className="container">
-              <div className="row">
-                <div className="col-lg-5 col-md-6">
-                  <div className="slider_detail-box">
-                    <h1>
-                    sed <br/>
-                      do eiusmod  <br/>
-                      incididunt
-                    </h1>
-                    <p>
-                      sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
-                      nostrud exercitation ullamco laboris nisi
-                    </p>
-                    <div class="btn-box">
-                      <a href="" class="btn-1">
-                       Leer mas
-                      </a>
-                    </div>
-                  </div>
-                </div>
                 <div className="col-md-6">
                   <div className="slider_img-box">
                     <img src="images/slider-img.png" alt=""/>
@@ -204,7 +159,7 @@ function Caja() {
     <div className="container">
       <div className="custom_heading-container">
         <h2>
-          Bienvenidos
+        Empieza tu Primer Proyecto
         </h2>
       </div>
       <div className="layout_padding2">
@@ -213,15 +168,11 @@ function Caja() {
         </div>
         <div className="detail-box">
           <p>
-            dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
-            aliqua.
-            Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-            Duis
-            aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
+          Da el primer paso hacia una gestión más organizada y eficiente. Crea tu proyecto hoy y descubre cómo nuestra plataforma puede transformar tu flujo de trabajo.
           </p>
           <div>
             <a href="">
-            Leer mas
+            Empezar Ya
             </a>
           </div>
         </div>
@@ -243,8 +194,8 @@ function Caja() {
           </div>
           <div className="detail-box">
             <h4>
-             AAAAA <br/>
-            AAAA
+            Planificación <br/>
+            Estructurada
             </h4>
             <p>
               have suffered alteration in some form, by injected humour, or randomised words which don&#39;t look even
@@ -258,8 +209,8 @@ function Caja() {
           </div>
           <div className="detail-box">
             <h4>
-              BBBBB<br/>
-               BBBBB
+            Colaboración <br/>
+            Efectiva
             </h4>
             <p>
               have suffered alteration in some form, by injected humour, or randomised words which don&#39;t look even
@@ -273,8 +224,8 @@ function Caja() {
           </div>
           <div className="detail-box">
             <h4>
-              CCCC <br/>
-              CCCC
+            Monitoreo <br/>
+            y Reportes
             </h4>
             <p>
               have suffered alteration in some form, by injected humour, or randomised words which don&#39;t look even
@@ -396,11 +347,12 @@ function Caja() {
             <div className="client_container layout_padding2">
               <div className="client_text">
                 <p>
-                  psum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-                  magna
-                  aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-                  commodo
-                  consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum
+                "¿Puedo personalizar las notificaciones de mi proyecto?"
+                <br/> 
+                <br/>
+                </p>
+                <p>
+                  R:
                 </p>
               </div>
               <div className="detail-box">
@@ -409,7 +361,7 @@ function Caja() {
                 </div>
                 <div className="name">
                   <h5>
-                    Joans Mark
+                  Usuario Anonimo
                   </h5>
                   <p>
                     cal
@@ -422,12 +374,14 @@ function Caja() {
             <div className="client_container layout_padding2">
               <div className="client_text">
                 <p>
-                  psum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-                  magna
-                  aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-                  commodo
-                  consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum
+                "¿Cómo funciona el sistema de seguimiento de tareas?"
+                <br/> 
+                <br/>
                 </p>
+                <p>
+                  R:
+                </p>
+                
               </div>
               <div className="detail-box">
                 <div className="img-box">
@@ -435,7 +389,7 @@ function Caja() {
                 </div>
                 <div className="name">
                   <h5>
-                    Joans Mark
+                   Usuario Anonimo
                   </h5>
                   <p>
                     cal
@@ -448,11 +402,12 @@ function Caja() {
             <div className="client_container layout_padding2">
               <div className="client_text">
                 <p>
-                  psum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-                  magna
-                  aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-                  commodo
-                  consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum
+                "¿Qué tan seguro es el almacenamiento de datos en esta aplicación?"
+                <br/> 
+                <br/>
+                </p>
+                <p>
+                  R:
                 </p>
               </div>
               <div className="detail-box">
@@ -461,7 +416,7 @@ function Caja() {
                 </div>
                 <div className="name">
                   <h5>
-                    Joans Mark
+                  Usuario Anonimo
                   </h5>
                   <p>
                     cal
@@ -478,7 +433,7 @@ function Caja() {
   
   <div class="footer_bg">
     <section className="info_section layout_padding2-bottom">
-      <div class="container">
+      <div className="container">
         <h3 className="">
           GTPI
         </h3>
@@ -493,7 +448,7 @@ function Caja() {
                  Contactos
                 </h5>
               </div>
-              <div class="d-flex ">
+              <div className="d-flex ">
                 <ul>
                   <li>
                     <a href="">
@@ -512,34 +467,7 @@ function Caja() {
                       Nuestro Contacto
                     </a>
                   </li>
-                </ul>
-                <ul className="ml-3 ml-md-5">
-                  <li>
-                    <a href="">
-                      Lorem ipsum
-                    </a>
-                  </li>
-                  <li>
-                    <a href="">
-                      dolor sit amet,
-                    </a>
-                  </li>
-                  <li>
-                    <a href="">
-                      consectetur
-                    </a>
-                  </li>
-                  <li>
-                    <a href="">
-                      adipiscing
-                    </a>
-                  </li>
-                  <li>
-                    <a href="">
-                      elit, sed do eiusmod
-                    </a>
-                  </li>
-                </ul>
+                </ul> 
               </div>
             </div>
           </div>

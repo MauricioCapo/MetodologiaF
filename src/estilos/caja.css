@@ -383,7 +383,9 @@ li {
   .slider_section .carousel_btn-container .carousel-control-next:hover {
     background-color: #feb543;
   }
-  
+  .slider_detail-box{
+    padding-top: 50px;
+  }
   .slider_section .carousel_btn-container .carousel-control-prev {
     background-image: url(../imagenes/prev.png);
   }
