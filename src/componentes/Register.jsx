@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import '../estilos/Register.css';
 import LoginS from './Login.jsx';
+import { Link } from 'react-router-dom';
 
 function RegisterS() {
     const [showLogin, setShowLogin] = useState(false);
@@ -10,7 +11,6 @@ function RegisterS() {
     const [email, setEmail] = useState('');
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
-    const [dob, setDob] = useState('');
     const [message, setMessage] = useState('');
 
     const handleRegister = async (event) => {
@@ -30,7 +30,7 @@ function RegisterS() {
                     lastName, 
                     username, 
                     password, 
-                    email, 
+                    email
                 }),
             });
             const data = await response.json();
@@ -105,7 +105,9 @@ function RegisterS() {
                                 </div>
 
                                 <p>¿Ya tienes una cuenta? 
-                                    <a href="#" onClick={handleLogin}> Iniciar Sesión</a>
+                                <Link to="/Login" className="link" onClick={handleLogin}>
+                                    Registrarse
+                                </Link>
                                 </p>
                             </div>
                         </form>

@@ -1,6 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import "../estilos/Login.css";
 import RegisterS from './Register.jsx';
+import { Link } from 'react-router-dom';
+
 function LoginS({ setIsLoggedIn }) {
     const [showLogin, setShowLogin] = useState(true);
     const [showRegister, setShowRegister] = useState(false);
@@ -75,9 +77,9 @@ function LoginS({ setIsLoggedIn }) {
                                 </div>
                                 <p>
                                     No tienes una cuenta?{' '}
-                                    <a href="#" onClick={handleRegisters}>
-                                        Registrarse
-                                    </a>
+                                    <Link to="/register" className="mi-clase" onClick={handleRegisters}>
+                                         Registrarse
+                                    </Link>
                                 </p>
                             </div>
                         </form>

@@ -1,9 +1,14 @@
-const express = require('express');
-const cookieParser = require('cookie-parser');
-const morgan = require('morgan');
+import express from 'express';
+import cookieParser from 'cookie-parser';
+import morgan from 'morgan';
+import path from 'path';  // Cambié de require a import
+import cors from 'cors';
 
-const app = express();
+const app = express();  // Debe ir aquí, después de importar express
 const PORT = 3000;
+
+// Habilitar CORS después de la inicialización de app
+app.use(cors());
 
 // Middleware para logging y parseo
 app.use(morgan('dev'));     // Loggea cada request en consola
@@ -13,6 +18,11 @@ app.use(express.static('public'));  // Para servir archivos estáticos
 
 // Usuarios de prueba
 let usuarios = [{ user: "admin", password: "1234" }];
+
+// Ruta /inicio que sirve el archivo index.html de la carpeta public
+app.get('/inicio', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'index.html'));
+});
 
 // Middleware de autenticación
 function authMiddleware(req, res, next) {
@@ -76,7 +86,7 @@ app.put('/logout', authMiddleware, (req, res) => {
 // Ruta de información de usuario autenticado
 app.get('/info', authMiddleware, (req, res) => {
     let usuario = req.usuario;
-    res.status(200).json({ ok: true, mensaje: 'Esta logueado', usuario: usuario.user });
+    res.status(200).json({ ok: true, mensaje: 'Está logueado', usuario: usuario.user });
 });
 
 // Ruta para obtener la lista de usuarios (solo para prueba)

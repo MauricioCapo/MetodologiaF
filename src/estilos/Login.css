@@ -42,7 +42,7 @@
     line-height: 40px;
 
 }
-.Form-Regis a {
+a, .link {
     color: white;
     text-decoration: none;
     font-family: 'calibri';
