@@ -6,14 +6,15 @@ import { FaEdit, FaTrash, FaPlus } from "react-icons/fa";
 const ProyectoS = () => {
     const [isOpen, setIsOpen] = useState(true);
     const [projects, setProjects] = useState([
-        { id: Date.now(), name: "Proyecto A", description: "Descripción breve del Proyecto A", status: "En progreso" },
-        { id: Date.now() + 1, name: "Proyecto B", description: "Descripción breve del Proyecto B", status: "Completo" },
-        { id: Date.now() + 2, name: "Proyecto C", description: "Descripción breve del Proyecto C", status: "Pendiente" },
+        { id: Date.now(), name: "Proyecto A", description: "Descripción breve del Proyecto A", status: "En progreso", file: null },
+        { id: Date.now() + 1, name: "Proyecto B", description: "Descripción breve del Proyecto B", status: "Completo", file: null },
+        { id: Date.now() + 2, name: "Proyecto C", description: "Descripción breve del Proyecto C", status: "Pendiente", file: null },
     ]);
     const [editingProject, setEditingProject] = useState(null);
     const [newName, setNewName] = useState("");
     const [newDescription, setNewDescription] = useState("");
     const [newStatus, setNewStatus] = useState("");
+    const [newFile, setNewFile] = useState(null);
 
     const toggleSidebar = () => {
         setIsOpen(!isOpen);
@@ -21,10 +22,11 @@ const ProyectoS = () => {
 
     const handleAddProject = () => {
         const newProject = {
-            id: Date.now(), // Genera un ID único usando la hora actual
+            id: Date.now(), 
             name: `Proyecto ${String.fromCharCode(65 + projects.length)}`,
             description: `Descripción breve del Proyecto ${String.fromCharCode(65 + projects.length)}`,
             status: "Pendiente",
+            file: null,
         };
         setProjects([...projects, newProject]);
     };
@@ -32,7 +34,6 @@ const ProyectoS = () => {
     const handleDeleteProject = (id) => {
         const updatedProjects = projects.filter(project => project.id !== id);
         setProjects(updatedProjects);
-        console.log("Proyecto eliminado, nuevos proyectos:", updatedProjects);
     };
 
     const handleEditProject = (project) => {
@@ -40,18 +41,34 @@ const ProyectoS = () => {
         setNewName(project.name);
         setNewDescription(project.description);
         setNewStatus(project.status);
+        setNewFile(project.file);
     };
 
     const handleSaveEdit = () => {
         setProjects(projects.map(project =>
             project.id === editingProject.id
-                ? { ...project, name: newName, description: newDescription, status: newStatus }
+                ? { ...project, name: newName, description: newDescription, status: newStatus, file: newFile }
                 : project
         ));
         setEditingProject(null);
         setNewName("");
         setNewDescription("");
         setNewStatus("");
+        setNewFile(null);
+    };
+
+    const handleFileChange = (e) => {
+        const file = e.target.files[0]; // Obtener el primer archivo
+        setNewFile(file);
+    };
+
+    const handleDeleteFile = () => {
+        setNewFile(null); // Eliminar el archivo cargado
+    };
+
+    // Crear una URL temporal para la descarga del archivo
+    const getDownloadUrl = (file) => {
+        return file ? URL.createObjectURL(file) : null;
     };
 
     return (
@@ -96,14 +113,27 @@ const ProyectoS = () => {
                                             value={newDescription}
                                             onChange={(e) => setNewDescription(e.target.value)}
                                         ></textarea>
-                                      <select
-                                        value={newStatus}
-                                        onChange={(e) => setNewStatus(e.target.value)}
+                                        <select
+                                            value={newStatus}
+                                            onChange={(e) => setNewStatus(e.target.value)}
                                         >
-                                        <option value="En progreso">En progreso</option>
-                                        <option value="Pendiente">Pendiente</option>
-                                        <option value="Completo">Completo</option>
+                                            <option value="En progreso">En progreso</option>
+                                            <option value="Pendiente">Pendiente</option>
+                                            <option value="Completo">Completo</option>
                                         </select>
+                                        <input className="btn-elegir"
+                                            type="file" 
+                                            onChange={handleFileChange} 
+                                        />
+                                        {newFile && (
+                                            <div className="Eliminar-btn">
+                                                <p>Archivo seleccionado: {newFile.name}</p>
+                                                <button onClick={handleDeleteFile}>Eliminar archivo</button>
+                                                <a href={getDownloadUrl(newFile)} download>
+                                                    Descargar archivo
+                                                </a>
+                                            </div>
+                                        )}
                                         <button className="Save-button" onClick={handleSaveEdit}>Guardar Cambios</button>
                                         <button className="Cancelar-button" onClick={() => setEditingProject(null)}>Cancelar</button>
                                     </div>
@@ -112,6 +142,14 @@ const ProyectoS = () => {
                                         <h3>{project.name}</h3>
                                         <p>{project.description}</p>
                                         <p><strong>Estado:</strong> {project.status}</p>
+                                        {project.file && (
+                                            <div className="file-container">
+                                            <p>Archivo: {project.file.name}</p>
+                                            <a className="Download" href={getDownloadUrl(project.file)} download>
+                                                Descargar archivo 
+                                            </a>
+                                        </div>
+                                        )}
                                         <div className="project-actions">
                                             <button className="edit-button" onClick={() => handleEditProject(project)}>
                                                 <FaEdit /> Editar
@@ -129,6 +167,6 @@ const ProyectoS = () => {
             </div>
         </div>
     );
-}
+};
 
 export default ProyectoS;

@@ -214,3 +214,98 @@ button {
   padding: 8px 12px;
   margin-right: 10px;
 }
+
+
+
+
+
+.project-card .file-container {
+  margin-top: 10px;
+  font-size: 14px;
+  color: #333;
+}
+
+/* Estilo del texto que muestra el nombre del archivo */
+.project-card .file-container p {
+  font-weight: bold;
+  color: #555;
+}
+
+/* Estilo para el enlace de descarga */
+.project-card .file-container a.Download {
+  display: inline-block;
+  margin-top: 8px;
+  padding: 8px 16px;
+  background-color: #4CAF50; /* Color de fondo */
+  color: white; /* Color de texto */
+  text-decoration: none; /* Eliminar subrayado */
+  border-radius: 4px; /* Bordes redondeados */
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+/* Estilo del enlace al pasar el mouse (hover) */
+.project-card .file-container a.Download:hover {
+  background-color: #45a049; /* Color al pasar el ratón */
+}
+
+/* Estilo para el contenedor general */
+.project-card .file-container a.Download:active {
+  background-color: #3e8e41; /* Color al hacer clic */
+}
+/* Estilos para el input de archivo */
+.project-card .edit-form input[type="file"] {
+  display: inline-block;
+  background-color: #4CAF50; /* Fondo verde */
+  color: white; /* Texto blanco */
+  padding: 8px 12px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  margin-top: 10px;
+}
+.project-card  .btn-elegir {
+  background-color: #4CAF50;
+}
+
+/* Estilo para el botón de eliminar archivo */
+.project-card .Eliminar-btn button {
+  margin-top: 10px;
+  background-color: #f44336; /* Rojo para eliminar */
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.3s ease;
+}
+
+/* Estilo cuando se pasa el mouse sobre el botón de eliminar archivo */
+.project-card .edit-form button:hover {
+  background-color: #e53935; /* Rojo más oscuro */
+}
+
+/* Estilo para el enlace de descarga */
+.project-card .edit-form a {
+  margin-top: 10px;
+  display: inline-block;
+  padding: 8px 16px;
+  background-color: #2196F3; /* Color azul */
+  color: white;
+  text-decoration: none;
+  border-radius: 4px;
+  font-size: 14px;
+  transition: background-color 0.3s ease;
+}
+
+/* Estilo al pasar el ratón sobre el enlace de descarga */
+.project-card .edit-form a:hover {
+  background-color: #1976D2; /* Azul más oscuro */
+}
+
+/* Estilo de la caja de archivo seleccionado */
+.project-card .edit-form div {
+  margin-top: 15px;
+}
