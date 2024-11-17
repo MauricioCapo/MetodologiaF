@@ -12,6 +12,7 @@ function Caja() {
   const [showMenu, setShowMenu] = useState(true);
   const [showPrincipal, setShowPrincipal] = useState(false);
   const [showLogin, setShowLogin] = useState(false);
+  const [showSubmenu, setShowSubmenu] = useState(false);
   const navigate = useNavigate();   
 
   const handleRegisters = () => {
@@ -34,6 +35,9 @@ function Caja() {
     setShowLogin(true);
     setShowMenu(false);
   };
+  const handleCuentas = () => {
+    setShowSubmenu(!showSubmenu);
+  };
 
   return (
     <>
@@ -50,11 +54,13 @@ function Caja() {
                 <li><a href="#" id="selected2">Nosotros</a></li>
                 <li><a href="#" id="selected2">Contactos</a></li>
                 <li>
-                  <a href="#" id="selected2" onClick={handleLogin}><CgUser className="iconoLR" /></a>
+                  <a href="#" id="selected2" onClick={handleCuentas}><CgUser className="iconoLR" /></a>
+                  {showSubmenu && (
                   <ul className="submenu">
                     <li><Link to="/register" onClick={handleRegisters}>Registrarse</Link></li>
                     <li><Link to="/login" onClick={handleLogin}>Iniciar sesión</Link></li>
                   </ul>
+                )}
                 </li>
               </ul>
             </nav>
