@@ -96,12 +96,14 @@ const ProyectoS = () => {
                                             value={newDescription}
                                             onChange={(e) => setNewDescription(e.target.value)}
                                         ></textarea>
-                                        <input
-                                            type="text"
-                                            placeholder="Estado"
-                                            value={newStatus}
-                                            onChange={(e) => setNewStatus(e.target.value)}
-                                        />
+                                      <select
+                                        value={newStatus}
+                                        onChange={(e) => setNewStatus(e.target.value)}
+                                        >
+                                        <option value="En progreso">En progreso</option>
+                                        <option value="Pendiente">Pendiente</option>
+                                        <option value="Completo">Completo</option>
+                                        </select>
                                         <button className="Save-button" onClick={handleSaveEdit}>Guardar Cambios</button>
                                         <button className="Cancelar-button" onClick={() => setEditingProject(null)}>Cancelar</button>
                                     </div>
