@@ -3,6 +3,10 @@ import cookieParser from 'cookie-parser';
 import morgan from 'morgan';
 import path from 'path';
 import cors from 'cors';
+import mysql from 'mysql2';
+import jwt from 'jsonwebtoken';
+
+const SECRET_KEY = 'tu_clave_secreta'; // Cambia esto por una clave segura
 
 const app = express();
 const PORT = 5000;
@@ -19,6 +23,21 @@ app.use(cors({
     credentials: true,  // Permite el envío de cookies
 }));
 
+const db = mysql.createConnection({
+    host: 'b9wesjn6saikl2isg1k6-mysql.services.clever-cloud.com',   // Cambia a tu host de base de datos (ej. Clever Cloud)
+    user: 'u1qp7pshb1mzs9fv',        // Tu usuario de base de datos
+    password: 'zdbm9VMq1wrpEXHcnKAc',// Tu contraseña de base de datos
+    database: 'b9wesjn6saikl2isg1k6' // El nombre de tu base de datos
+});
+
+db.connect((err) => {
+    if (err) {
+        console.error('Error de conexión a la base de datos:', err);
+    } else {
+        console.log('Conectado a la base de datos.');
+    }
+});
+
 // Usuarios de prueba
 let usuarios = [{ username: "admin", password: "1234" }];
 
@@ -30,15 +49,19 @@ app.get('/inicio', (req, res) => {
 // Middleware de autenticación
 function authMiddleware(req, res, next) {
     const token = req.cookies.token;
+
     if (!token) {
-        return res.status(401).json({ ok: false, mensaje: 'No autorizado' });
+        return res.status(401).json({ mensaje: 'No autorizado' });
     }
-    const usuario = usuarios.find(u => u.token === token);
-    if (!usuario) {
-        return res.status(401).json({ ok: false, mensaje: 'No autorizado' });
-    }
-    req.usuario = usuario;
-    next();
+
+    jwt.verify(token, SECRET_KEY, (err, decoded) => {
+        if (err) {
+            return res.status(401).json({ mensaje: 'Token inválido' });
+        }
+
+        req.usuario = decoded; // Decodifica el token y almacena los datos del usuario
+        next();
+    });
 }
 
 // Función para generar un token simple
@@ -47,42 +70,74 @@ function generarToken() {
 }
 
 // Ruta de registro de usuario
-app.post('/register', async (req, res) => {
-    const { username, password } = req.body;
+app.post('/register', (req, res) => {
+    const { username, password, email, firstName, lastName } = req.body;
 
-    let usuario = usuarios.find(u => u.username === username);
-    if (usuario) {
-        return res.status(401).json({ ok: false, mensaje: 'Usuario ya registrado' });
-    } else {
-        usuarios.push({ username, password });
-        return res.status(201).json({ ok: true, mensaje: 'Usuario registrado' });
-    }
+    // Verificar si el usuario ya existe
+    const checkUserQuery = 'SELECT * FROM usuarios WHERE username = ?';
+    db.query(checkUserQuery, [username], (err, results) => {
+        if (err) {
+            console.error('Error al verificar usuario:', err);
+            return res.status(500).json({ ok: false, mensaje: 'Error al verificar usuario' });
+        }
+
+        if (results.length > 0) {
+            // Si el usuario ya existe, enviar error
+            return res.status(400).json({ ok: false, mensaje: 'Usuario ya registrado' });
+        } else {
+            // Si el usuario no existe, registrar el nuevo usuario
+            const insertQuery = 'INSERT INTO usuarios (username, password, email, first_name, last_name) VALUES (?, ?, ?, ?, ?)';
+            db.query(insertQuery, [username, password, email, firstName, lastName], (err, results) => {
+                if (err) {
+                    db.end();
+                    console.error('Error al registrar usuario:', err);
+                    return res.status(500).json({ ok: false, mensaje: 'Error al registrar usuario' });
+                }
+                return res.status(201).json({ ok: true, mensaje: 'Usuario registrado correctamente' });
+            });
+        }
+    });
 });
 
 // Ruta de inicio de sesión
-app.post('/login', async (req, res) => {
+app.post('/login', (req, res) => {
     const { username, password } = req.body;
 
-    let usuario = usuarios.find(u => u.username === username && password === u.password);
-    if (usuario) {
-        let token = generarToken();
-        usuario.token = token;
-        res.cookie('token', token, {
-            httpOnly: true,
-            expires: new Date(Date.now() + 600000)  // Expira en 10 minutos
-        });
-        res.status(200).json({ ok: true, mensaje: 'Usuario logueado', token });
-    } else {
-        res.status(401).json({ ok: false, mensaje: 'Credenciales inválidas' });
+    if (!username || !password) {
+        return res.status(400).json({ mensaje: 'Faltan datos en la solicitud' });
     }
+
+    const query = 'SELECT * FROM usuarios WHERE username = ?';
+    db.query(query, [username], (err, results) => {
+        if (err) {
+            console.error('Error al buscar usuario:', err);
+            return res.status(500).json({ mensaje: 'Error del servidor' });
+        }
+
+        if (results.length === 0) {
+            return res.status(401).json({ mensaje: 'Credenciales inválidas' });
+        }
+
+        const user = results[0];
+
+        if (user.password !== password) {
+            return res.status(401).json({ mensaje: 'Credenciales inválidas' });
+        }
+
+        // Generar el token
+        const token = jwt.sign({ id: user.id, username: user.username }, SECRET_KEY, {
+            expiresIn: '1h', // Token válido por 1 hora
+        });
+
+        res.cookie('token', token, { httpOnly: true }); // Enviar el token como cookie
+        res.status(200).json({ mensaje: 'Inicio de sesión exitoso', usuario: user.username });
+    });
 });
 
 // Ruta de cierre de sesión
-app.put('/logout', authMiddleware, (req, res) => {
-    let usuario = req.usuario;
-    delete usuario.token;
+app.post('/logout', (req, res) => {
     res.clearCookie('token');
-    res.status(200).json({ ok: true, mensaje: 'Usuario deslogueado' });
+    res.status(200).json({ mensaje: 'Sesión cerrada correctamente' });
 });
 
 // Ruta de información de usuario autenticado
