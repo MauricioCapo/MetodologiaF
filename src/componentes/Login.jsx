@@ -3,7 +3,7 @@ import "../estilos/Login.css";
 import RegisterS from './Register.jsx';
 import { Link } from 'react-router-dom';
 
-function LoginS({ setIsLoggedIn }) {
+function LoginS({ setIsLoggedIn, onLoginSuccess }) {
     const [showLogin, setShowLogin] = useState(true);
     const [showRegister, setShowRegister] = useState(false);
     const [username, setUsername] = useState('');
@@ -26,9 +26,9 @@ function LoginS({ setIsLoggedIn }) {
                 credentials: 'include',  // Asegura que las cookies se envíen con la solicitud
             });
             const data = await response.json();
-            if (response.ok) {  // Verificamos si la respuesta fue exitosa (status 200)
-                // Si la respuesta es exitosa, el usuario está logueado
+            if (response.ok) {  // Si la respuesta es exitosa
                 setMessage('¡Bienvenido!');
+                onLoginSuccess(); // Llama a la función que se pasa como prop para mostrar ProyectoS
             } else {
                 setMessage(data.mensaje);  // Muestra el mensaje del servidor en caso de error
             }
@@ -95,4 +95,3 @@ function LoginS({ setIsLoggedIn }) {
 }
 
 export default LoginS;
-    

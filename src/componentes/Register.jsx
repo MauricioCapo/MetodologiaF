@@ -105,7 +105,7 @@ function RegisterS() {
                                 </div>
 
                                 <p>¿Ya tienes una cuenta? 
-                                <Link to="/Login" className="link" onClick={handleLogin}>
+                                <Link to="/login" className="link" onClick={handleLogin}>
                                     Iniciar Sesion
                                 </Link>
                                 </p>

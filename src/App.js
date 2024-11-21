@@ -1,4 +1,4 @@
-import Caja from './componentes/Caja.jsx';
+import Caja from './componentes/caja.jsx';
 import './App.css';
 
 function App() {
