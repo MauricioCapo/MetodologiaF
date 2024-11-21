@@ -62,8 +62,6 @@ function Caja() {
     <>
       <header>
         <div className="container__menu">
-          <div className="logo">
-          </div>
           <div className="menu">
             <nav>
               <ul>

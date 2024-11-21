@@ -18,6 +18,7 @@ const ProyectoS = () => {
     const [newDescription, setNewDescription] = useState("");
     const [newStatus, setNewStatus] = useState("");
     const [newFile, setNewFile] = useState(null);
+    const [searchTerm, setSearchTerm] = useState("");
 
     const toggleSidebar = () => {
         setIsOpen(!isOpen);
@@ -77,6 +78,13 @@ const ProyectoS = () => {
         ? projects.filter(project => project.status === filter)
         : projects;
 
+    // Filtrado adicional por búsqueda
+    const searchedProjects = searchTerm
+        ? filteredProjects.filter((project) =>
+            project.name.toLowerCase().includes(searchTerm.toLowerCase())
+        )
+        : filteredProjects;
+
     return (
         <div className="container2">
             <div className={`sidebar ${isOpen ? 'open' : 'closed'}`}>
@@ -85,14 +93,6 @@ const ProyectoS = () => {
                 </button>
                 {isOpen && (
                     <div>
-                        <h2>Menú</h2>
-                        <ul>
-                            {projects.map((project) => (
-                                <li key={project.id}>
-                                    <a href={`#project-${project.id}`}>{project.name}</a>
-                                </li>
-                            ))}
-                        </ul>
                         <div>
                             <h2>Filtrar Proyectos</h2>
                             <select onChange={(e) => setFilter(e.target.value)}>
@@ -102,6 +102,18 @@ const ProyectoS = () => {
                                 <option value="Completo">Completo</option>
                             </select>
                         </div>
+
+                    
+                        <div>
+                            <input
+                                type="text"
+                                placeholder="Buscar proyecto..."
+                                value={searchTerm}
+                                onChange={(e) => setSearchTerm(e.target.value)}
+                                style={{ padding: '8px', width: '100%', marginTop: '10px' }}
+                            />
+                        </div>
+
                         <div>
                             <h2>Acciones</h2>
                             <button className="add-project-button" onClick={handleAddProject}>
@@ -111,14 +123,12 @@ const ProyectoS = () => {
                                 <FaTrash /> Eliminar Todos
                             </button>
                         </div>
-                        <div>
+                        <div className="notifica">
                             <h2>Notificaciones</h2>
                             <p>Proyectos sin archivo: {projects.filter((p) => !p.file).length}</p>
                             <p>Proyectos pendientes: {projects.filter((p) => p.status === "Pendiente").length}</p>
-                        </div>
-                        <div>
-                            <h2>Calendario</h2>
-                            <Calendar />
+                            <p>Proyectos completos: {projects.filter((p) => p.status === "Completo").length}</p>
+                            <p>Proyectos incompletos: {projects.filter((p) => p.status !== "Completo").length}</p>
                         </div>
                     </div>
                 )}
@@ -127,7 +137,7 @@ const ProyectoS = () => {
                 <div className="VistaTodo">
                     <h1>Panel de Proyectos</h1>
                     <div className="project-list">
-                        {filteredProjects.map((project) => (
+                        {searchedProjects.map((project) => (
                             <div key={project.id} id={`project-${project.id}`} className="project-card">
                                 {editingProject && editingProject.id === project.id ? (
                                     <div className="edit-form">
