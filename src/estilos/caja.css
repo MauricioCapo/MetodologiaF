@@ -14,13 +14,13 @@ body{
 header{
     width: 100%;
     height: 80px;
-    margin-top: 40px;
-    position: fixed;
+  background-color: #163a9e;
+    
     z-index: 1;
     padding: 40px;
 }
 .container__menu{
-    max-width: 1200px;
+    max-width: 1000px;
     height: 100%;
     margin: auto;
     display: flex;
@@ -31,10 +31,7 @@ header{
     display: flex;
     align-items: center;
 }
-.logo img{
-    width: 60px;
 
-}
 .menu{
     display: flex;
     align-items: center;
