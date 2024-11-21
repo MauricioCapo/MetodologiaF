@@ -63,7 +63,6 @@ function Caja() {
       <header>
         <div className="container__menu">
           <div className="logo">
-            <img className="logo" src={require("../imagenes/logo-magtimus-v2.3-1.png")} alt="Logo" />
           </div>
           <div className="menu">
             <nav>

@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import '../estilos/Proyectos.css';
 import { CgArrowsExpandRight, CgCompressRight } from "react-icons/cg";
 import { FaEdit, FaTrash, FaPlus } from "react-icons/fa";
+import Calendar from "react-calendar";
+import "react-calendar/dist/Calendar.css";
 
 const ProyectoS = () => {
     const [isOpen, setIsOpen] = useState(true);
@@ -10,6 +12,7 @@ const ProyectoS = () => {
         { id: Date.now() + 1, name: "Proyecto B", description: "Descripción breve del Proyecto B", status: "Completo", file: null },
         { id: Date.now() + 2, name: "Proyecto C", description: "Descripción breve del Proyecto C", status: "Pendiente", file: null },
     ]);
+    const [filter, setFilter] = useState("");
     const [editingProject, setEditingProject] = useState(null);
     const [newName, setNewName] = useState("");
     const [newDescription, setNewDescription] = useState("");
@@ -22,7 +25,7 @@ const ProyectoS = () => {
 
     const handleAddProject = () => {
         const newProject = {
-            id: Date.now(), 
+            id: Date.now(),
             name: `Proyecto ${String.fromCharCode(65 + projects.length)}`,
             description: `Descripción breve del Proyecto ${String.fromCharCode(65 + projects.length)}`,
             status: "Pendiente",
@@ -58,18 +61,21 @@ const ProyectoS = () => {
     };
 
     const handleFileChange = (e) => {
-        const file = e.target.files[0]; // Obtener el primer archivo
+        const file = e.target.files[0];
         setNewFile(file);
     };
 
     const handleDeleteFile = () => {
-        setNewFile(null); // Eliminar el archivo cargado
+        setNewFile(null);
     };
 
-    // Crear una URL temporal para la descarga del archivo
     const getDownloadUrl = (file) => {
         return file ? URL.createObjectURL(file) : null;
     };
+
+    const filteredProjects = filter
+        ? projects.filter(project => project.status === filter)
+        : projects;
 
     return (
         <div className="container2">
@@ -81,24 +87,48 @@ const ProyectoS = () => {
                     <div>
                         <h2>Menú</h2>
                         <ul>
-                            <li><a href="#section1">Sección 1</a></li>
-                            <li><a href="#section2">Sección 2</a></li>
-                            <li><a href="#section3">Sección 3</a></li>
-                            <li><a href="#section4">Sección 4</a></li>
-                            <li><a href="#section5">Sección 5</a></li>
+                            {projects.map((project) => (
+                                <li key={project.id}>
+                                    <a href={`#project-${project.id}`}>{project.name}</a>
+                                </li>
+                            ))}
                         </ul>
+                        <div>
+                            <h2>Filtrar Proyectos</h2>
+                            <select onChange={(e) => setFilter(e.target.value)}>
+                                <option value="">Todos</option>
+                                <option value="En progreso">En progreso</option>
+                                <option value="Pendiente">Pendiente</option>
+                                <option value="Completo">Completo</option>
+                            </select>
+                        </div>
+                        <div>
+                            <h2>Acciones</h2>
+                            <button className="add-project-button" onClick={handleAddProject}>
+                                <FaPlus /> Nuevo Proyecto
+                            </button>
+                            <button className="delete-all-button" onClick={() => setProjects([])}>
+                                <FaTrash /> Eliminar Todos
+                            </button>
+                        </div>
+                        <div>
+                            <h2>Notificaciones</h2>
+                            <p>Proyectos sin archivo: {projects.filter((p) => !p.file).length}</p>
+                            <p>Proyectos pendientes: {projects.filter((p) => p.status === "Pendiente").length}</p>
+                        </div>
+                        <div>
+                            <h2>Calendario</h2>
+                            <Calendar />
+                        </div>
                     </div>
                 )}
             </div>
             <div className="content">
                 <div className="VistaTodo">
                     <h1>Panel de Proyectos</h1>
-                    <button className="add-project-button1" onClick={handleAddProject}>
-                        <FaPlus /> Añadir Proyecto
-                    </button>
                     <div className="project-list">
-                        {projects.map((project) => (
-                            <div key={project.id} className="project-card">
+                        {filteredProjects.map((project) => (
+                            <div key={project.id} id={`project-${project.id}`} className="project-card">
                                 {editingProject && editingProject.id === project.id ? (
                                     <div className="edit-form">
                                         <h2>Editar Proyecto</h2>
@@ -121,12 +151,12 @@ const ProyectoS = () => {
                                             <option value="Pendiente">Pendiente</option>
                                             <option value="Completo">Completo</option>
                                         </select>
-                                        <input className="btn-elegir"
-                                            type="file" 
-                                            onChange={handleFileChange} 
+                                        <input
+                                            type="file"
+                                            onChange={handleFileChange}
                                         />
                                         {newFile && (
-                                            <div className="Eliminar-btn">
+                                            <div>
                                                 <p>Archivo seleccionado: {newFile.name}</p>
                                                 <button onClick={handleDeleteFile}>Eliminar archivo</button>
                                                 <a href={getDownloadUrl(newFile)} download>
@@ -134,8 +164,8 @@ const ProyectoS = () => {
                                                 </a>
                                             </div>
                                         )}
-                                        <button className="Save-button" onClick={handleSaveEdit}>Guardar Cambios</button>
-                                        <button className="Cancelar-button" onClick={() => setEditingProject(null)}>Cancelar</button>
+                                        <button onClick={handleSaveEdit}>Guardar Cambios</button>
+                                        <button onClick={() => setEditingProject(null)}>Cancelar</button>
                                     </div>
                                 ) : (
                                     <div>
@@ -143,21 +173,19 @@ const ProyectoS = () => {
                                         <p>{project.description}</p>
                                         <p><strong>Estado:</strong> {project.status}</p>
                                         {project.file && (
-                                            <div className="file-container">
-                                            <p>Archivo: {project.file.name}</p>
-                                            <a className="Download" href={getDownloadUrl(project.file)} download>
-                                                Descargar archivo 
-                                            </a>
-                                        </div>
+                                            <div>
+                                                <p>Archivo: {project.file.name}</p>
+                                                <a href={getDownloadUrl(project.file)} download>
+                                                    Descargar archivo
+                                                </a>
+                                            </div>
                                         )}
-                                        <div className="project-actions">
-                                            <button className="edit-button" onClick={() => handleEditProject(project)}>
-                                                <FaEdit /> Editar
-                                            </button>
-                                            <button className="delete-button" onClick={() => handleDeleteProject(project.id)}>
-                                                <FaTrash /> Eliminar
-                                            </button>
-                                        </div>
+                                        <button onClick={() => handleEditProject(project)}>
+                                            <FaEdit /> Editar
+                                        </button>
+                                        <button onClick={() => handleDeleteProject(project.id)}>
+                                            <FaTrash /> Eliminar
+                                        </button>
                                     </div>
                                 )}
                             </div>

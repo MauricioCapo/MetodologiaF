@@ -1,17 +1,18 @@
-/* Eliminar márgenes y padding por defecto en el body */
+/* Reset de márgenes y padding */
 body, html {
   margin: 0;
   padding: 0;
   height: 100%; /* Asegura que la altura ocupe toda la pantalla */
   overflow-x: hidden; /* Evita desplazamiento horizontal */
+  font-family: Arial, sans-serif; /* Establece una fuente estándar */
 }
 
-/* El contenedor principal que envuelve todo */
+/* Contenedor principal */
 .container2 {
   display: flex;
   flex-direction: row;
-  height: 100vh; /* 100% de la altura de la ventana */
-  width: 100%; /* Asegura que ocupe todo el ancho de la pantalla */
+  height: 100vh; /* Altura completa de la ventana */
+  width: 100%;
 }
 
 /* Sidebar */
@@ -19,20 +20,41 @@ body, html {
   width: 200px;
   background-color: #2c3e50;
   color: #ecf0f1;
-  overflow: hidden;
+  height: 100vh; /* Altura completa */
+  overflow-y: auto; /* Permite desplazamiento vertical */
   transition: width 0.3s ease-in-out;
-  height: 100vh; /* Asegura que la barra lateral ocupe toda la altura */
 }
 
 .sidebar.closed {
-  width: 50px;
+  width: 50px; /* Sidebar reducido */
 }
 
-.sidebar.open {
-  width: 110px;
+.sidebar h2 {
+  margin: 10px 15px;
+  font-size: 18px;
 }
 
-/* Estilo del botón para abrir/cerrar la barra lateral */
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.sidebar ul li {
+  padding: 10px 15px;
+}
+
+.sidebar ul li a {
+  color: #ecf0f1;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+.sidebar ul li a:hover {
+  text-decoration: underline;
+}
+
+/* Botón de colapsar/expandir sidebar */
 .toggle-button {
   font-size: 20px;
   color: #fff;
@@ -41,98 +63,81 @@ body, html {
   cursor: pointer;
   width: 100%;
   text-align: center;
-  background: linear-gradient(to right, #9eb1d4, #FD8986);
+  background: linear-gradient(to right, #9eb1d4, #fd8986);
+  transition: background-color 0.3s ease;
 }
 
-/* Cambios en el hover de los botones */
 .toggle-button:hover {
   background-color: #3498db;
 }
 
-.sidebar h2 {
-  margin: 5px 0 10px 5px;
-}
-
-.sidebar ul {
-  list-style-type: none;
-  padding: 0;
-}
-
-.sidebar li {
-  padding: 15px 20px;
-}
-
-.sidebar ul li a {
-  color: #ecf0f1;
-  text-decoration: none;
-}
-
-.sidebar ul li a:hover {
-  text-decoration: underline;
-}
-
-/* Estilo para el contenido principal */
+/* Contenido principal */
 .content {
   flex-grow: 1;
   padding: 20px;
-  padding-top: 120px;
-  background: linear-gradient(to right, #9eb1d4, #FD8986);
+  background: linear-gradient(to right, #9eb1d4, #fd8986);
+  overflow-y: auto;
   transition: margin-left 0.3s ease-in-out;
-  height: 100vh; /* Asegura que el contenido ocupe toda la altura */
-  overflow-y: auto; /* Permite el desplazamiento vertical */
 }
 
-/* Estilo del área de los proyectos */
+/* Vista general de proyectos */
 .VistaTodo {
   background-color: #fff;
   margin-top: 30px;
-  height: 100%; /* Hace que ocupe todo el espacio disponible */
-  overflow-y: auto; /* Permite desplazamiento dentro de esta sección */
+  height: calc(100% - 40px); /* Espacio ajustado */
+  overflow-y: auto;
 }
 
-/* Estilo de los botones */
-.add-project-button, .edit-button, .delete-button, .toggle-button, .Cancelar-button, .Save-button {
-  background-color: #007BFF;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  padding: 8px 12px;
-  cursor: pointer;
-  transition: background-color 0.3s;
-  font-size: 14px;
-  display: flex;
-  align-items: center;
-  gap: 5px;
-  margin-bottom: 10px;
-}
-
-.add-project-button1 {
-  background-color: #007BFF;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  padding: 8px 12px;
-  margin-bottom: 10px;
-}
-
-.add-project-button:hover, .edit-button:hover, .delete-button:hover, .toggle-button:hover, .Cancelar-button:hover, .Save-button:hover {
-  background-color: #0056b3;
-}
-
+/* Tarjeta de proyecto */
 .project-card {
   background-color: #f9f9f9;
   border: 1px solid #ddd;
   border-radius: 8px;
   padding: 15px;
   margin-bottom: 15px;
-  margin-left: 10px;
-  margin-right: 10px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  position: relative;
 }
 
-/* Estilo de los inputs y textarea */
-input[type="text"], textarea {
+/* Botones */
+button {
+  font-family: inherit;
+  font-size: 14px;
+  padding: 8px 12px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.add-project-button {
+  background-color: #007bff;
+  color: white;
+}
+
+.add-project-button:hover {
+  background-color: #0056b3;
+}
+
+.delete-button {
+  background-color: #f44336;
+  color: white;
+}
+
+.delete-button:hover {
+  background-color: #d32f2f;
+}
+
+.edit-button {
+  background-color: #4caf50;
+  color: white;
+}
+
+.edit-button:hover {
+  background-color: #388e3c;
+}
+
+/* Inputs y Textareas */
+input[type="text"], textarea, select {
   width: 100%;
   padding: 8px;
   margin-bottom: 10px;
@@ -140,172 +145,65 @@ input[type="text"], textarea {
   border-radius: 4px;
   font-size: 14px;
   outline: none;
-  transition: border-color 0.3s;
-}
-select {
-  width: 100%;
-  padding: 8px;
-  margin-bottom: 10px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  font-size: 14px;
-  outline: none;
-  transition: border-color 0.3s;
+  transition: border-color 0.3s ease;
 }
 
-select:focus {
-  border-color: #007BFF;
+input[type="text"]:focus, textarea:focus, select:focus {
+  border-color: #007bff;
 }
 
-/* Estilos de opciones dentro del select (si es necesario personalizar más) */
-select option {
-  padding: 10px;
-  background-color: #fff;
-  color: #333;
-}
-input[type="text"]:focus, textarea:focus {
-  border-color: #007BFF;
-}
-
+/* Formularios de edición */
 .edit-form {
-  background-color: #ffffff;
+  background-color: #fff;
   border: 1px solid #ddd;
   border-radius: 8px;
   padding: 20px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   margin-top: 10px;
-  position: relative;
-  z-index: 1;
 }
 
-button {
-  font-family: inherit;
-}
-
-/* Estilo para los botones de editar y eliminar */
-.edit-button {
-  background-color: #007BFF;
+/* Botón para archivos */
+input[type="file"] {
+  background-color: #4caf50;
   color: white;
-  border: none;
-}
-
-.delete-button {
-  background-color: #f44336; /* Color rojo */
-  color: white;
-  border: none;
-  border-radius: 5px;
-  padding: 8px 12px;
-  margin-bottom: 10px;
-}
-
-.Cancelar-button {
-  background-color: #e0e0e0; /* Gris */
-  color: black;
-  border: none;
-  border-radius: 5px;
-  padding: 8px 12px;
-}
-
-.Save-button {
-  background-color: #4CAF50; /* Verde */
-  color: white;
-  border: none;
-  border-radius: 5px;
-  padding: 8px 12px;
-  margin-right: 10px;
-}
-
-
-
-
-
-.project-card .file-container {
-  margin-top: 10px;
-  font-size: 14px;
-  color: #333;
-}
-
-/* Estilo del texto que muestra el nombre del archivo */
-.project-card .file-container p {
-  font-weight: bold;
-  color: #555;
-}
-
-/* Estilo para el enlace de descarga */
-.project-card .file-container a.Download {
-  display: inline-block;
-  margin-top: 8px;
-  padding: 8px 16px;
-  background-color: #4CAF50; /* Color de fondo */
-  color: white; /* Color de texto */
-  text-decoration: none; /* Eliminar subrayado */
-  border-radius: 4px; /* Bordes redondeados */
-  font-weight: bold;
-  transition: background-color 0.3s ease;
-}
-
-/* Estilo del enlace al pasar el mouse (hover) */
-.project-card .file-container a.Download:hover {
-  background-color: #45a049; /* Color al pasar el ratón */
-}
-
-/* Estilo para el contenedor general */
-.project-card .file-container a.Download:active {
-  background-color: #3e8e41; /* Color al hacer clic */
-}
-/* Estilos para el input de archivo */
-.project-card .edit-form input[type="file"] {
-  display: inline-block;
-  background-color: #4CAF50; /* Fondo verde */
-  color: white; /* Texto blanco */
-  padding: 8px 12px;
+  padding: 8px;
   border: none;
   border-radius: 4px;
   cursor: pointer;
-  font-size: 14px;
-  margin-top: 10px;
-}
-.project-card  .btn-elegir {
-  background-color: #4CAF50;
 }
 
-/* Estilo para el botón de eliminar archivo */
-.project-card .Eliminar-btn button {
-  margin-top: 10px;
-  background-color: #f44336; /* Rojo para eliminar */
-  color: white;
-  border: none;
-  padding: 8px 16px;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 14px;
-  transition: background-color 0.3s ease;
+input[type="file"]:hover {
+  background-color: #45a049;
 }
 
-/* Estilo cuando se pasa el mouse sobre el botón de eliminar archivo */
-.project-card .edit-form button:hover {
-  background-color: #e53935; /* Rojo más oscuro */
-}
-
-/* Estilo para el enlace de descarga */
-.project-card .edit-form a {
-  margin-top: 10px;
-  display: inline-block;
-  padding: 8px 16px;
-  background-color: #2196F3; /* Color azul */
+/* Descarga de archivo */
+.file-container a.Download {
+  background-color: #4caf50;
   color: white;
   text-decoration: none;
+  padding: 8px 16px;
   border-radius: 4px;
-  font-size: 14px;
+  font-weight: bold;
   transition: background-color 0.3s ease;
 }
 
-/* Estilo al pasar el ratón sobre el enlace de descarga */
-.project-card .edit-form a:hover {
-  background-color: #1976D2; /* Azul más oscuro */
+.file-container a.Download:hover {
+  background-color: #388e3c;
 }
 
-/* Estilo de la caja de archivo seleccionado */
-.project-card .edit-form div {
-  margin-top: 15px;
+/* Calendario */
+.react-calendar {
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 10px;
+}
+
+.react-calendar__tile--active {
+  background-color: #4caf50;
+  color: white;
+}
+
+.react-calendar__tile--active:hover {
+  background-color: #388e3c;
 }
