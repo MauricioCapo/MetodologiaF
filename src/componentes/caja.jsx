@@ -78,8 +78,8 @@ function Caja() {
                       </ul>
                     ) : (
                       <ul className="submenu">
-                        <li><Link to="/register" onClick={handleRegisters}>Registrarse</Link></li>
-                        <li><Link to="/login" onClick={handleLogin}>Iniciar sesión</Link></li>
+                        <li className='left'><Link to="/register" onClick={handleRegisters}>Registrarse</Link></li>
+                        <li className='right'><Link to="/login" onClick={handleLogin}>Iniciar sesión</Link></li>
                       </ul>
                     )
                   )}

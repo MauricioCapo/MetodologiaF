@@ -13,7 +13,7 @@ body{
 
 header{
     width: 100%;
-    height: 80px;
+    height: 100px;
     background: linear-gradient(to right, #4f14ad, #330be4);
     z-index: 1;
     padding: 40px;
@@ -69,14 +69,35 @@ header{
 }
 .submenu {
   position: absolute;
-  top: 100%; /* Posición debajo del elemento padre */
-  left: 50%; /* Posición inicial */
-  transform: translateX(-65%); /* Centra el submenú */
-  background: transparent;
+  top: 50%; /* Ajusta esto según la altura del navbar para alinear verticalmente */
+  left: 5vh; /* Alinea el submenú a la derecha */
+  transform: translateY(-35%); /* Centra verticalmente */
+  border-radius: 50px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* Añade sombra para mejor visibilidad */
   list-style: none;
-  padding-top: 15px;
-  margin: 0;
   z-index: 1000;
+}
+
+.submenu li {
+  margin: 5px 0; /* Separación entre opciones */
+}
+
+.submenu li a {
+  color: #4f14ad; /* Color de texto del submenú */
+  text-decoration: none;
+  font-size: 14px;
+  text-transform: uppercase;
+}
+
+.submenu li a:hover {
+  color: #867fa5; /* Color al pasar el mouse */
+}
+
+/* Ajuste del icono para que esté alineado correctamente */
+.iconoLR {
+  font-size: 20px;
+  color: #fff;
+  cursor: pointer;
 }
 
 
