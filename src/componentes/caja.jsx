@@ -96,7 +96,7 @@ function Caja() {
             <div className="cover">
               <div className="text">
                 <h1>Ayudamos a las empresas a tener una mejor Gestión.</h1>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Cupiditate quo nostrum eligendi sequi iste quae voluptates assumenda nemo odit cum!</p>
+                <p>¡Gestiona ya tu propio proyecto de investigación! Para comenzar, inicie sesión.</p>
                 <input type="button" value="Comenzar" onClick={handlePrincipal} />
               </div>
               <div className="svg">
@@ -202,8 +202,7 @@ function Caja() {
                       Estructurada
                     </h4>
                     <p>
-                      have suffered alteration in some form, by injected humour, or randomised words which don&#39;t look even
-                      slightly believable. If you are
+                      
                     </p>
                   </div>
                 </div>
@@ -217,8 +216,7 @@ function Caja() {
                       Efectiva
                     </h4>
                     <p>
-                      have suffered alteration in some form, by injected humour, or randomised words which don&#39;t look even
-                      slightly believable. If you are
+                      
                     </p>
                   </div>
                 </div>
@@ -232,8 +230,7 @@ function Caja() {
                       y Reportes
                     </h4>
                     <p>
-                      have suffered alteration in some form, by injected humour, or randomised words which don&#39;t look even
-                      slightly believable. If you are
+                      
                     </p>
                   </div>
                 </div>
