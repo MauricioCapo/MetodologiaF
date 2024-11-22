@@ -66,9 +66,9 @@ function Caja() {
             <nav>
               <ul>
                 <li><Link to="/inicio" id="selected" onClick={handleMenu}>Inicio</Link></li>
-                <li><a href="#" id="selected2">Servicios</a></li>
-                <li><a href="#" id="selected2">Nosotros</a></li>
-                <li><a href="#" id="selected2">Contactos</a></li>
+                <li><a href="#servicios" id="selected2">Servicios</a></li>
+                <li><a href="#consultas" id="selected2">Consultas</a></li>
+                <li><a href="#contactos" id="selected2">Contactos</a></li>
                 <li>
                   <a href="#" id="selected2" onClick={handleCuentas}><CgUser className="iconoLR" /></a>
                   {showSubmenu && (
@@ -104,7 +104,7 @@ function Caja() {
               </div>
             </div>
           </div>
-
+        
           <section className=" slider_section ">
             <div className="carousel slide" >
               <div className="carousel-inner">
@@ -184,7 +184,7 @@ function Caja() {
 
             </div>
           </section>
-          <section className="service_section">
+          <section id="servicios" className="service_section">
             <div className="container">
               <div className="custom_heading-container">
                 <h2>
@@ -340,7 +340,7 @@ function Caja() {
               </div>
             </div>
           </section>
-          <section className="client_section layout_padding">
+          <section id="consultas" className="client_section layout_padding">
             <div className="container">
               <h2>
                 Consultas
@@ -436,7 +436,7 @@ function Caja() {
           </section>
 
           <div className="footer_bg">
-            <section className="info_section layout_padding2-bottom">
+            <section id="contactos"  className="info_section layout_padding2-bottom">
               <div className="container">
                 <h3 className="">
                   GTPI

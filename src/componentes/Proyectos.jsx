@@ -166,31 +166,31 @@ const ProyectoS = () => {
                                             onChange={handleFileChange}
                                         />
                                         {newFile && (
-                                            <div>
+                                            <div className="file-container">
                                                 <p>Archivo seleccionado: {newFile.name}</p>
                                                 <button onClick={handleDeleteFile}>Eliminar archivo</button>
-                                                <a href={getDownloadUrl(newFile)} download>
+                                                <a className="Download" href={getDownloadUrl(newFile)} download>
                                                     Descargar archivo
                                                 </a>
                                             </div>
                                         )}
-                                        <button onClick={handleSaveEdit}>Guardar Cambios</button>
+                                        <button className="guardar" onClick={handleSaveEdit}>Guardar Cambios</button>
                                         <button onClick={() => setEditingProject(null)}>Cancelar</button>
                                     </div>
                                 ) : (
-                                    <div>
+                                    <div className="file-container1">
                                         <h3>{project.name}</h3>
                                         <p>{project.description}</p>
                                         <p><strong>Estado:</strong> {project.status}</p>
                                         {project.file && (
                                             <div>
                                                 <p>Archivo: {project.file.name}</p>
-                                                <a href={getDownloadUrl(project.file)} download>
+                                                <a className="Download1" href={getDownloadUrl(project.file)} download>
                                                     Descargar archivo
                                                 </a>
                                             </div>
                                         )}
-                                        <button onClick={() => handleEditProject(project)}>
+                                        <button className="editar" onClick={() => handleEditProject(project)}>
                                             <FaEdit /> Editar
                                         </button>
                                         <button onClick={() => handleDeleteProject(project.id)}>
